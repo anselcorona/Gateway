@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3'
 services:
   api_gateway_web:
     image: anselcorona/gateway:latest
