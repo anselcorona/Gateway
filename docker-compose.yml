@@ -1,0 +1,32 @@
+version: '3.6'
+services:
+  api_gateway_web:
+    image: anselcorona/gateway:latest
+    expose:
+      - 8084
+    ports:
+      - "8084:8084"
+  microservicioscorreos:
+    image: anselcorona/final-correo:latest
+    expose:
+    - 8088
+    ports:
+    - "8088:8088"
+  microserviciosarticulos:
+    image: anselcorona/final-articulos:latest
+    expose:
+    - 8081
+    ports:
+    - "8081:8081"
+  microserviciosclientes:
+    image: anselcorona/final-clientes:latest
+    expose:
+    - 8082
+    ports:
+    - "8082:8082"
+  microservicioscompras:
+    image: anselcorona/final-compras:latest
+    expose:
+    - 8085
+    ports:
+    - "8085:8085"
