@@ -27,7 +27,7 @@ public class CorreoController {
     public ResponseEntity enviarCorreo(@RequestBody Cliente cliente) {
         
         HttpEntity<Cliente> request = new HttpEntity<>(cliente);
-        ResponseEntity<Cliente> exchange = restTemplate.exchange("http://localhost:8088/correo/nuevoCliente", HttpMethod.POST,
+        ResponseEntity<Cliente> exchange = restTemplate.exchange("http://drand.me:8088/correo/nuevoCliente", HttpMethod.POST,
                 request, Cliente.class);
 
         return new ResponseEntity<>(HttpStatus.OK);

@@ -20,7 +20,7 @@ public class ArticuloController {
     @GetMapping(value = "/api/articulos/todos", produces = { "application/json" })
     public ResponseEntity<List<Articulo>> listar() {
 
-        ResponseEntity<List<Articulo>> listResponseEntity = restTemplate.exchange("http://localhost:8081/articulos",
+        ResponseEntity<List<Articulo>> listResponseEntity = restTemplate.exchange("http://drand.me:8081/articulos",
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Articulo>>() {
                 });
         System.out.println("cod:" + listResponseEntity.getStatusCode());
@@ -31,7 +31,7 @@ public class ArticuloController {
     public ResponseEntity<List<Articulo>> articulosPorNombre(@PathVariable String nombre) {
 
         ResponseEntity<List<Articulo>> listResponseEntity = restTemplate.exchange(
-                "http://localhost:8081/articulos/nombre/" + nombre, HttpMethod.GET, null,
+                "http://drand.me:8081/articulos/nombre/" + nombre, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<Articulo>>() {
                 });
 
@@ -43,7 +43,7 @@ public class ArticuloController {
 
         HttpEntity<Articulo> request = new HttpEntity<>(articulo);
 
-        ResponseEntity<Articulo> exchange = restTemplate.exchange("http://localhost:8081/articulos/", HttpMethod.POST,
+        ResponseEntity<Articulo> exchange = restTemplate.exchange("http://drand.me:8081/articulos/", HttpMethod.POST,
                 request, Articulo.class);
 
         return new ResponseEntity<>(exchange.getStatusCode());
@@ -54,7 +54,7 @@ public class ArticuloController {
 
         HttpEntity<Articulo> request = new HttpEntity<>(articulo);
 
-        ResponseEntity<Articulo> exchange = restTemplate.exchange("http://localhost:8081/articulos/", HttpMethod.PUT,
+        ResponseEntity<Articulo> exchange = restTemplate.exchange("http://drand.me:8081/articulos/", HttpMethod.PUT,
                 request, Articulo.class);
 
         return new ResponseEntity<>(exchange.getStatusCode());
@@ -65,7 +65,7 @@ public class ArticuloController {
 
         HttpEntity<Long> request = new HttpEntity<>(id);
 
-        ResponseEntity<Long> exchange = restTemplate.exchange("http://localhost:8081/articulos/?id="+id, HttpMethod.DELETE,
+        ResponseEntity<Long> exchange = restTemplate.exchange("http://drand.me:8081/articulos/?id="+id, HttpMethod.DELETE,
                 request, Long.class);
 
         return new ResponseEntity<>(exchange.getStatusCode());
@@ -75,7 +75,7 @@ public class ArticuloController {
     public ResponseEntity<Articulo> comprarArticulos(@RequestParam("id") Long id,
             @RequestParam("cantidad") int cantidad) {
 
-        String url = "http://localhost:8081/articulos/comprar";
+        String url = "http://drand.me:8081/articulos/comprar";
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url).queryParam("id", id)
                 .queryParam("cantidad", cantidad);
@@ -90,7 +90,7 @@ public class ArticuloController {
     public ResponseEntity<List<Articulo>> articulosPaginacion(@RequestParam("limit") int limit,
             @RequestParam("offset") int offset) {
 
-        String url = "http://localhost:8081/articulos/paginacion";
+        String url = "http://drand.me:8081/articulos/paginacion";
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url).queryParam("limit", limit)
                 .queryParam("offset", offset);
 
@@ -106,7 +106,7 @@ public class ArticuloController {
 
         HttpEntity<Long> request = new HttpEntity<>(id);
 
-        ResponseEntity<Articulo> exchange = restTemplate.exchange("http://localhost:8081/articulos/" + id,
+        ResponseEntity<Articulo> exchange = restTemplate.exchange("http://drand.me:8081/articulos/" + id,
                 HttpMethod.GET, request, Articulo.class);
 
         return new ResponseEntity<>(exchange.getBody(), HttpStatus.OK);
@@ -115,7 +115,7 @@ public class ArticuloController {
     @GetMapping("/api/articulos/cantidad")
     public ResponseEntity<Long> contarArticulos() {
 
-        ResponseEntity<Long> exchange = restTemplate.exchange("http://localhost:8081/articulos/cantidad",
+        ResponseEntity<Long> exchange = restTemplate.exchange("http://drand.me:8081/articulos/cantidad",
                 HttpMethod.GET, null, Long.class);
 
         return new ResponseEntity<>(exchange.getBody(), HttpStatus.OK);

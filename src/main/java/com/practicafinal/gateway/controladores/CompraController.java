@@ -33,7 +33,7 @@ public class CompraController {
     @GetMapping(value="/api/compra")
     public ResponseEntity<List<Compra>> listarCompras() {
         
-        ResponseEntity<List<Compra>> listResponseEntity = restTemplate.exchange("http://localhost:8085/compras", HttpMethod.GET, null, new ParameterizedTypeReference<List<Compra>>() {});
+        ResponseEntity<List<Compra>> listResponseEntity = restTemplate.exchange("http://drand.me:8085/compras", HttpMethod.GET, null, new ParameterizedTypeReference<List<Compra>>() {});
 
         return new ResponseEntity<>(listResponseEntity.getBody(), listResponseEntity.getStatusCode());
     }
@@ -43,7 +43,7 @@ public class CompraController {
         
         HttpEntity<Compra> request = new HttpEntity<>(compra);
 
-        ResponseEntity<Compra> exchange = restTemplate.exchange("http://localhost:8085/compras", HttpMethod.POST, request, Compra.class);
+        ResponseEntity<Compra> exchange = restTemplate.exchange("http://drand.me:8085/compras", HttpMethod.POST, request, Compra.class);
 
         return new ResponseEntity<>(exchange.getStatusCode());
     }
@@ -53,7 +53,7 @@ public class CompraController {
     @GetMapping(value = "api/compras/paginacion",  params = {"limit", "offset"})
     public ResponseEntity<List<Compra>> comprasPorPaginacion(@RequestParam("limit") int limit, @RequestParam("offset") int offset) {
         
-        String url = "http://localhost:8085/compras/paginacion";
+        String url = "http://drand.me:8085/compras/paginacion";
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
                 .queryParam("limit", limit)
                 .queryParam("offset", offset);
@@ -70,7 +70,7 @@ public class CompraController {
         Cliente cliente2 = clienteController.buscarPorId(cliente).getBody();
         HttpEntity<Cliente> request = new HttpEntity<>(cliente2);
 
-        String url = "http://localhost:8085/compras/paginacion";
+        String url = "http://drand.me:8085/compras/paginacion";
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
                 .queryParam("limit", limit)
                 .queryParam("offset", offset);
@@ -86,7 +86,7 @@ public class CompraController {
 
         HttpEntity<Long> request = new HttpEntity<>(id);
 
-        ResponseEntity<Compra> exchange = restTemplate.exchange("http://localhost:8085/compras/" + id, HttpMethod.GET, request, Compra.class);
+        ResponseEntity<Compra> exchange = restTemplate.exchange("http://drand.me:8085/compras/" + id, HttpMethod.GET, request, Compra.class);
 
         return new ResponseEntity<>(exchange.getBody(), exchange.getStatusCode());
         

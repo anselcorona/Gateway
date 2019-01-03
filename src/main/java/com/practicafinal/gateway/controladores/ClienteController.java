@@ -24,7 +24,7 @@ public class ClienteController {
         @GetMapping(value = "/api/clientes/todos", produces = { "application/json" })
         public ResponseEntity<List<Cliente>> listar() {
                 ResponseEntity<List<Cliente>> listResponseEntity = restTemplate.exchange(
-                                "http://localhost:8082/clientes", HttpMethod.GET, null,
+                                "http://drand.me:8082/clientes", HttpMethod.GET, null,
                                 new ParameterizedTypeReference<List<Cliente>>() {
 
                                 });
@@ -35,7 +35,7 @@ public class ClienteController {
         @GetMapping(value = "/api/clientes/nombre/{nombre}")
         public ResponseEntity<List<Cliente>> clientesPorNombre(@PathVariable String nombre) {
                 ResponseEntity<List<Cliente>> listResponseEntity = restTemplate.exchange(
-                                "http://localhost:8082/clientes/nombre/" + nombre, HttpMethod.GET, null,
+                                "http://drand.me:8082/clientes/nombre/" + nombre, HttpMethod.GET, null,
                                 new ParameterizedTypeReference<List<Cliente>>() {
                                 });
                 return new ResponseEntity<>(listResponseEntity.getBody(), HttpStatus.OK);
@@ -45,7 +45,7 @@ public class ClienteController {
         public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente) {
 
                 HttpEntity<Cliente> request = new HttpEntity<>(cliente);
-                ResponseEntity<Cliente> exchange = restTemplate.exchange("http://localhost:8082/clientes/",
+                ResponseEntity<Cliente> exchange = restTemplate.exchange("http://drand.me:8082/clientes/",
                                 HttpMethod.POST, request, Cliente.class);
                 return new ResponseEntity<>(exchange.getStatusCode());
         }
@@ -54,10 +54,10 @@ public class ClienteController {
         public ResponseEntity<Cliente> devolverNuevoCliente(@RequestBody Cliente cliente) {
                 HttpEntity<Cliente> request = new HttpEntity<>(cliente);
                 // System.out.println("nombre: " + cliente.getNombre());
-                ResponseEntity<Cliente> exchange = restTemplate.exchange("http://localhost:8082/clientes/devolver",
+                ResponseEntity<Cliente> exchange = restTemplate.exchange("http://drand.me:8082/clientes/devolver",
                                 HttpMethod.POST, request, Cliente.class);
 
-                // restTemplate.exchange("http://localhost:8088/correo/nuevoCliente", HttpMethod.GET, request,
+                // restTemplate.exchange("http://drand.me:8088/correo/nuevoCliente", HttpMethod.GET, request,
                 //                 Cliente.class);
                 return new ResponseEntity<>(exchange.getBody(), exchange.getStatusCode());
         }
@@ -67,7 +67,7 @@ public class ClienteController {
 
                 HttpEntity<Cliente> request = new HttpEntity<>(cliente);
 
-                ResponseEntity<Cliente> exchange = restTemplate.exchange("http://localhost:8082/clientes/",
+                ResponseEntity<Cliente> exchange = restTemplate.exchange("http://drand.me:8082/clientes/",
                                 HttpMethod.PUT, request, Cliente.class);
 
                 return new ResponseEntity<>(exchange.getStatusCode());
@@ -78,7 +78,7 @@ public class ClienteController {
 
                 HttpEntity<Long> request = new HttpEntity<>(id);
 
-                ResponseEntity<Long> exchange = restTemplate.exchange("http://localhost:8082/clientes/",
+                ResponseEntity<Long> exchange = restTemplate.exchange("http://drand.me:8082/clientes/",
                                 HttpMethod.DELETE, request, Long.class);
 
                 return new ResponseEntity<>(exchange.getStatusCode());
@@ -89,7 +89,7 @@ public class ClienteController {
         public ResponseEntity<Cliente> clientesPaginacion(@RequestParam("limit") int limit,
                         @RequestParam("offset") int offset) {
 
-                String url = "http://localhost:8082/clientes/paginacion";
+                String url = "http://drand.me:8082/clientes/paginacion";
                 UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url).queryParam("limit", limit)
                                 .queryParam("offset", offset);
 
@@ -105,7 +105,7 @@ public class ClienteController {
 
                 HttpEntity<Long> request = new HttpEntity<>(id);
 
-                ResponseEntity<Cliente> exchange = restTemplate.exchange("http://localhost:8082/clientes/" + id,
+                ResponseEntity<Cliente> exchange = restTemplate.exchange("http://drand.me:8082/clientes/" + id,
                                 HttpMethod.GET, request, Cliente.class);
 
                 return new ResponseEntity<>(exchange.getBody(), exchange.getStatusCode());
@@ -114,7 +114,7 @@ public class ClienteController {
         @GetMapping("/api/clientes/cantidad")
         public ResponseEntity<Long> contarClientes() {
 
-                ResponseEntity<Long> exchange = restTemplate.exchange("http://localhost:8082/clientes/cantidad",
+                ResponseEntity<Long> exchange = restTemplate.exchange("http://drand.me:8082/clientes/cantidad",
                                 HttpMethod.GET, null, Long.class);
 
                 return new ResponseEntity<>(exchange.getBody(), exchange.getStatusCode());
